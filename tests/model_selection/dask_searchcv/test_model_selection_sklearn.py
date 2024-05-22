@@ -7,7 +7,7 @@ import pickle
 import dask
 import dask.array as da
 import numpy as np
-import packaging.version
+import packaging.version as pv
 import pytest
 import scipy.sparse as sp
 import sklearn.metrics
@@ -243,7 +243,7 @@ def test_return_train_score_warn():
         "std_train_score",
     }
 
-    include_train_score = SK_VERSION <= packaging.version.parse("0.21.dev0")
+    include_train_score = SK_VERSION <= pv.parse("0.21.dev0")
 
     if include_train_score:
         assert all(x in results for x in train_keys)
@@ -373,7 +373,7 @@ def test_grid_search_one_grid_point():
 def test_grid_search_bad_param_grid():
     # passing a non-iterable param grid raises a TypeError in scikit-learn > 1.0.2
     iterable_err = (
-        ValueError if SK_VERSION <= packaging.version.parse("1.0.2") else TypeError
+        ValueError if SK_VERSION <= pv.parse("1.0.2") else TypeError
     )
 
     param_dict = {"C": 1.0}
@@ -1207,7 +1207,7 @@ def test_search_train_scores_set_to_false():
     for key in gs.cv_results_:
         assert not key.endswith("train_score")
 
-    if SK_VERSION >= packaging.version.parse("0.22.dev0"):
+    if SK_VERSION >= pv.parse("0.22.dev0"):
         gs = dcv.GridSearchCV(clf, param_grid={"C": [0.1, 0.2]})
         gs.fit(X, y)
         for key in gs.cv_results_:

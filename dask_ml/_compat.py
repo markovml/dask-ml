@@ -6,7 +6,7 @@ from typing import Any
 import dask
 import dask.array as da
 import distributed
-import packaging.version as pv
+import packaging.version as pv as pv
 import pandas
 import sklearn
 import sklearn.utils.validation

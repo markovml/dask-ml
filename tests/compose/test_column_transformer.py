@@ -1,6 +1,6 @@
 import dask.dataframe as dd
 import numpy as np
-import packaging.version
+import packaging.version as pv
 import pandas as pd
 import pytest
 import sklearn.compose
@@ -20,7 +20,7 @@ def test_column_transformer():
     # Ordering of make_column_transformer was changed from
     # (columns, transformer) to (transformer, columns) in version 0.20.1 of scikit-learn
     # See https://github.com/scikit-learn/scikit-learn/pull/12626
-    if SK_VERSION < packaging.version.parse("0.20.1"):
+    if SK_VERSION < pv.parse("0.20.1"):
         a = sklearn.compose.make_column_transformer(
             (["A"], sklearn.preprocessing.OneHotEncoder(sparse_output=False)),
             (["B"], sklearn.preprocessing.StandardScaler()),

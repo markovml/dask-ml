@@ -1,7 +1,7 @@
 import dask.array as da
 import dask.dataframe as dd
 import numpy as np
-import packaging.version
+import packaging.version as pv
 import pandas as pd
 import pytest
 import scipy.sparse
@@ -99,7 +99,7 @@ def test_basic_dataframe(sparse_output, method, dask_data, dtype):
 
     assert isinstance(result, type(dask_data))
     assert len(result.columns) == expected.shape[1]
-    if sparse_output and PANDAS_VERSION >= packaging.version.parse("0.24.0"):
+    if sparse_output and PANDAS_VERSION >= pv.parse("0.24.0"):
         # pandas sparse ExtensionDtype interface
         dtype = pd.SparseDtype(dtype, dtype(0))
     assert (result.dtypes == dtype).all()

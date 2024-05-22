@@ -6,7 +6,7 @@ import dask
 import dask.array as da
 import dask.dataframe as dd
 import numpy as np
-import packaging.version
+import packaging.version as pv
 import scipy.sparse as sp
 from dask.base import tokenize
 from dask.delayed import Delayed, delayed
@@ -14,7 +14,7 @@ from sklearn.utils.validation import _is_arraylike, indexable
 
 from ..utils import _num_samples
 
-if packaging.version.parse(dask.__version__) > packaging.version.parse("0.15.4"):
+if pv.parse(dask.__version__) > pv.parse("0.15.4"):
     from dask.base import is_dask_collection
 else:
     from dask.base import Base

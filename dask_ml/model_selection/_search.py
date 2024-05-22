@@ -9,7 +9,7 @@ from operator import getitem
 
 import dask
 import numpy as np
-import packaging.version
+import packaging.version as pv
 from dask.base import tokenize
 from dask.delayed import delayed
 from dask.distributed import as_completed
@@ -74,12 +74,12 @@ except ImportError:  # pragma: no cover
 __all__ = ["GridSearchCV", "RandomizedSearchCV"]
 
 # scikit-learn > 1.0.2 removed _check_param_grid
-if SK_VERSION <= packaging.version.parse("1.0.2"):
+if SK_VERSION <= pv.parse("1.0.2"):
     from sklearn.model_selection._search import _check_param_grid
 else:
     _check_param_grid = None
 
-if SK_VERSION <= packaging.version.parse("0.21.dev0"):
+if SK_VERSION <= pv.parse("0.21.dev0"):
 
     _RETURN_TRAIN_SCORE_DEFAULT = "warn"
 

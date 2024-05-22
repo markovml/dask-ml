@@ -64,9 +64,9 @@ def test_fit(fit_intercept, solver):
 )
 def test_fit_solver(solver):
     import dask_glm
-    import packaging.version
+    import packaging.version as pv
 
-    if packaging.version.parse(dask_glm.__version__) <= packaging.version.parse(
+    if pv.parse(dask_glm.__version__) <= pv.parse(
         "0.2.0"
     ):
         pytest.skip("FutureWarning for dask config.")
